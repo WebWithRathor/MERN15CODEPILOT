@@ -1,10 +1,8 @@
 import { Router } from "express";
-import AdminRouter from "./admin/index.js";
-import UserRouter from "./user/index.js";
+import folderRouter from "./folders/index.js";
 
 const router = Router();
 
-router.use("/admin", AdminRouter);
-router.use("/user", UserRouter);
+router.use("/folder", folderRouter);
 
 export default router;
