@@ -1,8 +1,12 @@
 import { Router } from "express";
-import folderRouter from "./folders/index.js";
+import fileRoutes from "./file/index.js";
+import folderRoutes from "./folders/index.js";
+import userRoutes from "./user/index.js";
 
-const router = Router();
+const router = express.Router();
 
-router.use("/folder", folderRouter);
+router.use("/files", fileRoutes);
+router.use("/folders", folderRoutes);
+router.use("/auth", userRoutes);
 
 export default router;

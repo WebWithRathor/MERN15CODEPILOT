@@ -1,8 +1,16 @@
 import { Router } from "express";
-import { createFolder } from "../../controllers/folders/index.js";
+import {
+  createFolder,
+  deleteFolder,
+  getFolders,
+  updateFolder,
+} from "../../controllers/folders/index.js";
 
 const router = Router();
 
-router.get("/create", createFolder);
+router.post("/create", createFolder);
+router.get("/", getFolders);
+router.put("/update", updateFolder);
+router.delete("/:name", deleteFolder);
 
 export default router;
