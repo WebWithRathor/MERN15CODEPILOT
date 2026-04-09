@@ -1,4 +1,4 @@
-import express from "express";
+import { Router } from "express";
 import {
   register,
   login,
@@ -11,7 +11,7 @@ import {
 } from "../../middlewares/validators/user.validator.js";
 import { isAuthenticated } from "../../middlewares/auth.middleware.js";
 
-const router = express.Router();
+const router = Router();
 
 router.post("/register", validateRegister, register);
 router.post("/login", validateLogin, login);

@@ -1,6 +1,11 @@
 import axios from "axios";
 
-export async function callHuggingFace(prompt, key) {
+
+const finalPrompt = (message)=>{
+    return `system instruction do: ${message}`;
+}
+
+async function callHuggingFace(prompt, key) {
   try {
     const res = await axios.post(
       "https://router.huggingface.co/v1/chat/completions",
@@ -9,10 +14,10 @@ export async function callHuggingFace(prompt, key) {
         messages: [
           {
             role: "user",
-            content: prompt,
+            content: finalPrompt(prompt),
           },
         ],
-        max_tokens: 100,
+        maxtokens: 1000,
         temperature: 0.7,
       },
       {
@@ -22,6 +27,8 @@ export async function callHuggingFace(prompt, key) {
         },
       },
     );
+
+    
 
     return res.data.choices?.[0]?.message?.content || "No response";
   } catch (err) {
@@ -34,3 +41,5 @@ export async function callHuggingFace(prompt, key) {
     return "AI Error";
   }
 }
+
+export default callHuggingFace;

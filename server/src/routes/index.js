@@ -2,11 +2,19 @@ import { Router } from "express";
 import fileRoutes from "./file/index.js";
 import folderRoutes from "./folders/index.js";
 import userRoutes from "./user/index.js";
+import  callHuggingFaceApi  from "../utils/ai.util.js";
 
-const router = express.Router();
+const router = Router();
 
 router.use("/files", fileRoutes);
 router.use("/folders", folderRoutes);
 router.use("/auth", userRoutes);
+router.use("/ai/:chat", async (req, res) => {
+  const response = await callHuggingFaceApi(
+    req.params.chat,
+    process.env.HUGGING_FACE_KEY,
+  );
+  res.json({ response });
+});
 
 export default router;
